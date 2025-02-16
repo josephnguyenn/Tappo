@@ -20,14 +20,14 @@ class ShipmentSupplierController extends Controller
             'supplier_name' => 'required|string|unique:shipment_supplier'
         ]);
 
-        $supplier = ShipmentSupplier::create($request->all());
-        return response()->json($supplier, 201);
+        $shipment_supplier = ShipmentSupplier::create($request->all());
+        return response()->json($shipment_supplier, 201);
     }
 
     public function update(Request $request, $id) {
-        $supplier = ShipmentSupplier::findOrFail($id);
-        $supplier->update($request->all());
-        return response()->json($supplier, 200);
+        $shipment_supplier = ShipmentSupplier::findOrFail($id);
+        $shipment_supplier->update($request->all());
+        return response()->json($shipment_supplier, 200);
     }
 
     public function destroy($id) {
