@@ -9,6 +9,8 @@ use App\Http\Controllers\InvoiceController;
 use App\Http\Controllers\ShipmentController;
 use App\Http\Controllers\DeliverySupplierController;
 use App\Http\Controllers\ShipmentSupplierController;
+use App\Http\Controllers\AuthController;
+
 
 /*
 |--------------------------------------------------------------------------
@@ -31,3 +33,19 @@ Route::apiResource('invoices', InvoiceController::class);
 Route::apiResource('shipments', ShipmentController::class);
 Route::apiResource('delivery-suppliers', DeliverySupplierController::class);
 Route::apiResource('shipment-suppliers', ShipmentSupplierController::class);
+
+Route::post('/register', [AuthController::class, 'register']);
+Route::post('/login', [AuthController::class, 'login']);
+
+Route::middleware('auth:sanctum')->group(function () {
+    Route::post('/logout', [AuthController::class, 'logout']);
+
+    // Protect other API endpoints
+    Route::apiResource('customers', CustomerController::class);
+    Route::apiResource('products', ProductController::class);
+    Route::apiResource('orders', OrderController::class);
+    Route::apiResource('invoices', InvoiceController::class);
+    Route::apiResource('shipments', ShipmentController::class);
+    Route::apiResource('delivery-suppliers', DeliverySupplierController::class);
+    Route::apiResource('shipment-suppliers', ShipmentSupplierController::class);
+});
